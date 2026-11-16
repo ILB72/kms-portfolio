@@ -1,0 +1,24 @@
+# 결정성 확인: 같은 입력(updater/sample_input)으로 2회 실행
+# 명령: python updater/update.py --input updater/sample_input --out <run1|run2>
+
+candidates.md
+  run1 2f1c884f75a10b84866d20455b4e80865a6877c2b6184c9b8de3153fb3be9893
+  run2 2f1c884f75a10b84866d20455b4e80865a6877c2b6184c9b8de3153fb3be9893
+  일치
+
+metrics.json
+  run1 7a539e8111ca8279f37d446ce8ea6e8a2320a2e8874d06fa23de8bae96f5bb39
+  run2 7a539e8111ca8279f37d446ce8ea6e8a2320a2e8874d06fa23de8bae96f5bb39
+  일치
+
+site_data.json
+  run1 19881c0f483ad2265b65f025b5919923ac7bf1e0f8d5f0b0cbe6f173a82fc056
+  run2 19881c0f483ad2265b65f025b5919923ac7bf1e0f8d5f0b0cbe6f173a82fc056
+  일치
+
+warnings.txt
+  run1 e8ee6726cc81384fcdef67d83f5ebb63628e71d1610d8afc9b6ab5e5cbf02898
+  run2 e8ee6726cc81384fcdef67d83f5ebb63628e71d1610d8afc9b6ab5e5cbf02898
+  일치
+
+결과: 4개 파일 모두 일치
