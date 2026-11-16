@@ -1,0 +1,101 @@
+{
+  "metrics": {
+    "attendance_absent": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 0
+    },
+    "attendance_note": {
+      "source": "내 출석 기록",
+      "unit": "",
+      "value": {
+        "기준일": "2026-11-16",
+        "확정 전 일수": 1
+      }
+    },
+    "attendance_present": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 19
+    },
+    "attendance_rate": {
+      "source": "내 출석 기록",
+      "unit": "%",
+      "value": 95
+    },
+    "attendance_training_days": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 20
+    },
+    "resubmission_count": {
+      "source": "내 제출 현황",
+      "unit": "건",
+      "value": 7
+    },
+    "resubmitted_tasks": {
+      "source": "내 제출 현황",
+      "unit": "",
+      "value": [
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ]
+    },
+    "ritual_morning_count": {
+      "source": "리추얼 기록",
+      "unit": "회",
+      "value": 5
+    },
+    "ritual_record_days": {
+      "source": "리추얼 기록",
+      "unit": "일",
+      "value": 5
+    },
+    "ritual_wrapup_count": {
+      "source": "리추얼 기록",
+      "unit": "회",
+      "value": 4
+    },
+    "submission_count": {
+      "source": "내 제출 현황",
+      "unit": "건",
+      "value": 18
+    },
+    "submission_task_count": {
+      "source": "내 제출 현황",
+      "unit": "개",
+      "value": 11
+    }
+  },
+  "paragraphs": {
+    "대인관계력": [
+      {
+        "date": "2026-11-03",
+        "id": "2026-11-03_강점을위해노력하고생각한것_f62b7cba",
+        "item": "강점을 위해 노력하고 생각한 것",
+        "source": "리추얼 기록",
+        "text": "동료에게 내 풀이를 설명하며 피드백을 받았다."
+      }
+    ],
+    "자기동기력": [
+      {
+        "date": "2026-11-03",
+        "id": "2026-11-03_강점이드러난일화_df932e45",
+        "item": "강점이 드러난 일화",
+        "source": "리추얼 기록",
+        "text": "테스트가 막혔을 때 예전에 극복했던 경험을 떠올리고 다시 시도했다."
+      }
+    ],
+    "자기조절력": [
+      {
+        "date": "2026-10-23",
+        "id": "2026-10-23_강점이드러난일화_6f53033d",
+        "item": "강점이 드러난 일화",
+        "source": "리추얼 기록",
+        "text": "과제 제출 전에 결과를 다시 확인해서 실수를 찾았다."
+      }
+    ]
+  }
+}
