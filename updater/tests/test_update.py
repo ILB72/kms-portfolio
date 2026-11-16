@@ -51,7 +51,7 @@ class UpdateTest(unittest.TestCase):
             self.assertNotIn("님", text, f)
             self.assertNotIn("이름 가림", text, f)
             self.assertNotIn("예시동료", text, f)
-            self.assertNotIn("학자금", text, f)
+            self.assertNotIn("가족 모임", text, f)  # 민감 키워드 문장 제외
             self.assertNotIn("동료 1가", text, f)  # 동료 칸 내용 제외
         warn = read(os.path.join(out, "warnings.txt")).decode("utf-8")
         self.assertIn("이름 의심으로 제외: id=", warn)

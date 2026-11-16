@@ -2,8 +2,8 @@
 # 명령: python updater/update.py --input updater/sample_input --out <run1|run2>
 
 candidates.md
-  run1 2f1c884f75a10b84866d20455b4e80865a6877c2b6184c9b8de3153fb3be9893
-  run2 2f1c884f75a10b84866d20455b4e80865a6877c2b6184c9b8de3153fb3be9893
+  run1 c0c875d4e77c2ad59416a3bfdc200461acf03a710f529671d1d5d014e2b63cb4
+  run2 c0c875d4e77c2ad59416a3bfdc200461acf03a710f529671d1d5d014e2b63cb4
   일치
 
 metrics.json
@@ -17,8 +17,8 @@ site_data.json
   일치
 
 warnings.txt
-  run1 e8ee6726cc81384fcdef67d83f5ebb63628e71d1610d8afc9b6ab5e5cbf02898
-  run2 e8ee6726cc81384fcdef67d83f5ebb63628e71d1610d8afc9b6ab5e5cbf02898
+  run1 d2c63f5afa4cde39262db672071272984fb6ff110e5d2c92dfe0f7dfcb49f8df
+  run2 d2c63f5afa4cde39262db672071272984fb6ff110e5d2c92dfe0f7dfcb49f8df
   일치
 
 결과: 4개 파일 모두 일치
