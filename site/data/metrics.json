@@ -1,0 +1,13 @@
+{
+  "attendance_absent": { "source": "내 출석 기록", "unit": "일", "value": 0 },
+  "attendance_note": { "source": "내 출석 기록", "unit": "", "value": { "기준일": "2026-11-16", "확정 전 일수": 1 } },
+  "attendance_present": { "source": "내 출석 기록", "unit": "일", "value": 19 },
+  "attendance_rate": { "source": "내 출석 기록", "unit": "%", "value": 95 },
+  "attendance_training_days": { "source": "내 출석 기록", "unit": "일", "value": 20 },
+  "resubmission_count": { "source": "내 제출 현황", "unit": "건", "value": 7 },
+  "ritual_morning_count": { "source": "리추얼 기록", "unit": "회", "value": 20 },
+  "ritual_record_days": { "source": "리추얼 기록", "unit": "일", "value": 20 },
+  "ritual_wrapup_count": { "source": "리추얼 기록", "unit": "회", "value": 19 },
+  "submission_count": { "source": "내 제출 현황", "unit": "건", "value": 18 },
+  "submission_task_count": { "source": "내 제출 현황", "unit": "개", "value": 11 }
+}
