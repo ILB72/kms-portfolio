@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sys
 
 ABILITIES = ["자기조절력", "대인관계력", "자기동기력"]
@@ -220,16 +221,65 @@ def load_approved(path):
     return [(i["id"] if isinstance(i, dict) else i) for i in items]
 
 
+UPDATER_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLISH_FILES = ["metrics.json", "site_data.json"]
+
+
+def publish_refusal(input_dir, ritual_files):
+    """합성 샘플이 실사이트로 나가지 않도록 --publish-to 거부 사유를 돌려준다(없으면 None)."""
+    real_in = os.path.normcase(os.path.realpath(input_dir))
+    if "sample_input" in real_in:
+        return "입력 폴더 경로에 sample_input이 포함되어 있습니다."
+    upd = os.path.normcase(os.path.realpath(UPDATER_DIR))
+    if real_in == upd or real_in.startswith(upd + os.sep):
+        return "입력 폴더가 updater/ 폴더 안에 있습니다(샘플·예시 입력으로 간주)."
+    for path in ritual_files:
+        first = read_text(path).split("\n", 1)[0]
+        if "합성" in first:
+            return "리추얼 파일 첫 줄에 '합성' 표기가 있습니다: " + os.path.basename(path)
+    return None
+
+
+def publish(out_dir, dest):
+    os.makedirs(dest, exist_ok=True)
+    report = []
+    for name in PUBLISH_FILES:
+        src, dst = os.path.join(out_dir, name), os.path.join(dest, name)
+        if os.path.exists(dst):
+            with open(src, "rb") as a, open(dst, "rb") as b:
+                new, old = a.read(), b.read()
+            if new == old:
+                report.append((name, "변경 없음"))
+                continue
+            if new == old.replace(b"\r\n", b"\n"):
+                # git autocrlf로 체크아웃된 CRLF 사본: 내용이 같으므로 건드리지 않음
+                report.append((name, "변경 없음(줄바꿈 형식만 다름)"))
+                continue
+            state = "덮어씀"
+        else:
+            state = "새로 만듦"
+        shutil.copyfile(src, dst)
+        report.append((name, state))
+    return report
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="포트폴리오 수치·후보 자동 갱신")
     ap.add_argument("--input", required=True, help="입력 폴더")
     ap.add_argument("--out", required=True, help="출력 폴더")
+    ap.add_argument("--publish-to", default=None,
+                    help="사이트 data 폴더(예: site/data). 지정하면 metrics.json·site_data.json만 복사")
     args = ap.parse_args(argv)
 
     warnings = []
     files = sorted(glob.glob(os.path.join(args.input, "ritual-history-*.txt")))
     if not files:
         raise SystemExit("리추얼 파일(ritual-history-*.txt)이 없습니다.")
+    if args.publish_to:
+        reason = publish_refusal(args.input, files)
+        if reason:
+            print("--publish-to 거부: " + reason, file=sys.stderr)
+            return 2
     days = parse_rituals(files, warnings)
 
     att_path = os.path.join(args.input, "attendance.json")
@@ -270,6 +320,12 @@ def main(argv=None):
     print("기록일 %d, 후보 %d, 승인 반영 %d, 경고 %d"
           % (len(days), len(cands), sum(len(v) for v in site["paragraphs"].values()),
              len(set(warnings))))
+    if args.publish_to:
+        n_approved = sum(len(v) for v in site["paragraphs"].values())
+        print("publish 대상: %s" % args.publish_to)
+        print("승인 항목 %d개 / 후보 %d개" % (n_approved, len(cands)))
+        for name, state in publish(args.out, args.publish_to):
+            print("  %s: %s" % (name, state))
     return 0
 
 
