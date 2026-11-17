@@ -13,6 +13,13 @@
 
 테스트: `python -m unittest discover -s updater/tests`
 
+## 승인 → 사이트 반영
+실제 기록은 저장소 밖 폴더(예: `%TEMP%\real_in`)에 두고, 출력도 저장소 밖(예: `%TEMP%\real_out`)에 씁니다.
+1. `python updater/update.py --input <실데이터 폴더> --out <출력 폴더>`를 실행하고, 출력 폴더의 `candidates.md`에서 사이트에 쓸 후보 id를 고릅니다.
+2. 실데이터 폴더의 `approved.json`(`{"approved": []}`)에 고른 id를 추가합니다.
+3. 1단계 명령을 다시 실행합니다. 승인한 후보만 `site_data.json`의 `paragraphs`에 들어갑니다.
+4. 출력 폴더의 `site_data.json`과 `metrics.json`을 `site/data/`로 복사한 뒤 커밋하고 `main`에 병합하면 Vercel이 자동 배포합니다. (`candidates.md`·`warnings.txt`는 복사하지 않습니다.)
+
 ## 환경변수
 필요 없음. API 키도 쓰지 않습니다.
 
