@@ -1,0 +1,101 @@
+{
+  "metrics": {
+    "attendance_absent": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 0
+    },
+    "attendance_note": {
+      "source": "내 출석 기록",
+      "unit": "",
+      "value": {
+        "기준일": "2026-11-16",
+        "확정 전 일수": 1
+      }
+    },
+    "attendance_present": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 19
+    },
+    "attendance_rate": {
+      "source": "내 출석 기록",
+      "unit": "%",
+      "value": 95
+    },
+    "attendance_training_days": {
+      "source": "내 출석 기록",
+      "unit": "일",
+      "value": 20
+    },
+    "resubmission_count": {
+      "source": "내 제출 현황",
+      "unit": "건",
+      "value": 7
+    },
+    "resubmitted_tasks": {
+      "source": "내 제출 현황",
+      "unit": "",
+      "value": [
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ]
+    },
+    "ritual_morning_count": {
+      "source": "리추얼 기록",
+      "unit": "회",
+      "value": 20
+    },
+    "ritual_record_days": {
+      "source": "리추얼 기록",
+      "unit": "일",
+      "value": 20
+    },
+    "ritual_wrapup_count": {
+      "source": "리추얼 기록",
+      "unit": "회",
+      "value": 19
+    },
+    "submission_count": {
+      "source": "내 제출 현황",
+      "unit": "건",
+      "value": 18
+    },
+    "submission_task_count": {
+      "source": "내 제출 현황",
+      "unit": "개",
+      "value": 11
+    }
+  },
+  "paragraphs": {
+    "대인관계력": [
+      {
+        "date": "2026-11-11",
+        "id": "2026-11-11_그결과·알게된점_72596b39",
+        "item": "그 결과·알게 된 점",
+        "source": "리추얼 기록",
+        "text": "상대방의 의도를 최대한 훼손하지 않고 피드백을 한거 같아 좋았다."
+      }
+    ],
+    "자기동기력": [
+      {
+        "date": "2026-11-04",
+        "id": "2026-11-04_나에게남기는말_4fed03b3",
+        "item": "나에게 남기는 말",
+        "source": "리추얼 기록",
+        "text": "지금 고민하고 생각하는 내용이 나를 성장시키는 양분이 될거다!"
+      }
+    ],
+    "자기조절력": [
+      {
+        "date": "2026-11-04",
+        "id": "2026-11-04_오늘의첫행동_a589478d",
+        "item": "오늘의 첫 행동",
+        "source": "리추얼 기록",
+        "text": "과제 수행이나 완료 할 때 한번 더 확인하고 조금 더 생각해본다."
+      }
+    ]
+  }
+}

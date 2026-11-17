@@ -57,3 +57,29 @@ fetch('data/metrics.json').then(function (r) {
   }, { threshold: 0.15 });
   els.forEach(function (e) { io.observe(e); });
 })();
+
+// 4) 승인한 기록 문장: data/site_data.json 의 paragraphs 를 능력별로 렌더링. 없거나 비어 있거나 실패하면 섹션을 숨긴 채로 둔다.
+fetch('data/site_data.json').then(function (r) {
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}).then(function (d) {
+  var p = d && d.paragraphs, sec = document.getElementById('approved'), box = document.getElementById('approved-list');
+  if (!p || !sec || !box) return;
+  var n = 0;
+  ['자기조절력', '대인관계력', '자기동기력'].forEach(function (k) {
+    var items = p[k];
+    if (!items || !items.length) return;
+    var h = document.createElement('h3'); h.textContent = k; box.appendChild(h);
+    var ul = document.createElement('ul'); ul.className = 'ap-list';
+    items.forEach(function (it) {
+      if (!it || !it.text) return;
+      var li = document.createElement('li'); li.className = 'ap-item';
+      var t = document.createElement('p'); t.className = 'ap-text'; t.textContent = it.text;
+      var m = document.createElement('p'); m.className = 'ap-meta';
+      m.textContent = (it.date || '') + ' · 출처: ' + (it.source || '') + (it.item ? ', ' + it.item : '');
+      li.appendChild(t); li.appendChild(m); ul.appendChild(li); n++;
+    });
+    box.appendChild(ul);
+  });
+  if (n > 0) sec.hidden = false;
+}).catch(function () { /* 섹션 숨김 유지 */ });
