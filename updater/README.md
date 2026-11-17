@@ -17,8 +17,13 @@
 실제 기록은 저장소 밖 폴더(예: `%TEMP%\real_in`)에 두고, 출력도 저장소 밖(예: `%TEMP%\real_out`)에 씁니다.
 1. `python updater/update.py --input <실데이터 폴더> --out <출력 폴더>`를 실행하고, 출력 폴더의 `candidates.md`에서 사이트에 쓸 후보 id를 고릅니다.
 2. 실데이터 폴더의 `approved.json`(`{"approved": []}`)에 고른 id를 추가합니다.
-3. 1단계 명령을 다시 실행합니다. 승인한 후보만 `site_data.json`의 `paragraphs`에 들어갑니다.
-4. 출력 폴더의 `site_data.json`과 `metrics.json`을 `site/data/`로 복사한 뒤 커밋하고 `main`에 병합하면 Vercel이 자동 배포합니다. (`candidates.md`·`warnings.txt`는 복사하지 않습니다.)
+3. `--publish-to site/data`를 붙여 다시 실행합니다. 정상 실행이 끝나면 `metrics.json`·`site_data.json` 두 파일만 `site/data/`에 복사되고(같은 내용이면 "변경 없음"), 승인 항목 수·후보 수·덮어쓴 파일이 출력됩니다.
+   ```
+   python updater/update.py --input <실데이터 폴더> --out <출력 폴더> --publish-to site/data
+   ```
+4. 그 다음 커밋하고 `main`에 병합하면 Vercel이 자동 배포합니다. (`candidates.md`·`warnings.txt`는 복사되지 않습니다.)
+
+**안전장치**: 입력 폴더 경로에 `sample_input`이 있거나, 입력 폴더가 `updater/` 안이거나, 리추얼 파일 첫 줄에 '합성'이 있으면 `--publish-to`를 거부하고 이유를 출력한 뒤 종료코드 2로 끝납니다(아무것도 복사하지 않음). `--publish-to`를 빼면 복사하지 않습니다.
 
 ## 환경변수
 필요 없음. API 키도 쓰지 않습니다.
