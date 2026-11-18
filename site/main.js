@@ -84,16 +84,30 @@ fetch('data/site_data.json').then(function (r) {
   if (n > 0) sec.hidden = false;
 }).catch(function () { /* 섹션 숨김 유지 */ });
 
-// 화면 모드 전환: 기기 설정이 기본, 버튼으로 바꾸면 이 브라우저에만 기억한다.
+// 테마 전환: 시스템(기기 설정) → 라이트 → 다크 순서. 선택은 이 브라우저에만 기억한다.
 (function () {
-  var b = document.getElementById('theme-toggle');
-  if (!b) return;
-  b.addEventListener('click', function () {
-    var root = document.documentElement;
-    var cur = root.getAttribute('data-theme') ||
-      (window.matchMedia && matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-    var next = cur === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
+  var btn = document.getElementById('theme-btn');
+  if (!btn) return;
+  var root = document.documentElement, cur = 'system';
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') cur = t; } catch (e) {}
+  var ORDER = ['system', 'light', 'dark'];
+  var LABEL = { system: '시스템', light: '라이트', dark: '다크' };
+  var SVG = {
+    light: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    dark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+    system: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>'
+  };
+  function next(c) { return ORDER[(ORDER.indexOf(c) + 1) % 3]; }
+  function apply() {
+    if (cur === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', cur);
+    btn.innerHTML = SVG[cur];
+    btn.appendChild(document.createTextNode('테마: ' + LABEL[cur]));
+    btn.setAttribute('aria-label', '화면 테마: 현재 ' + LABEL[cur] + (cur === 'system' ? '(기기 설정을 따름)' : '') + '. 누르면 ' + LABEL[next(cur)] + '(으)로 바뀝니다.');
+  }
+  btn.addEventListener('click', function () {
+    cur = next(cur);
+    try { if (cur === 'system') localStorage.removeItem('theme'); else localStorage.setItem('theme', cur); } catch (e) {}
+    apply();
   });
+  apply();
 })();
