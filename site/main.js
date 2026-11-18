@@ -83,3 +83,17 @@ fetch('data/site_data.json').then(function (r) {
   });
   if (n > 0) sec.hidden = false;
 }).catch(function () { /* 섹션 숨김 유지 */ });
+
+// 화면 모드 전환: 기기 설정이 기본, 버튼으로 바꾸면 이 브라우저에만 기억한다.
+(function () {
+  var b = document.getElementById('theme-toggle');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var root = document.documentElement;
+    var cur = root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+})();
