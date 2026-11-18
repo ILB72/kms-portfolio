@@ -7,7 +7,7 @@
   --img-filter:none;
 }
 @media (prefers-color-scheme:dark){
-  :root{
+  :root:not([data-theme="light"]){
     --bg:#111A15;--card:#17231D;--fg:#E6EFE9;--muted:#A3B5AA;
     --accent:#7CC39A;--link:#8ED6AE;--on-accent:#111A15;
     --line:#2C4036;--card-line:#3A5245;--tint:#1C2B23;--track:#26382E;
@@ -15,6 +15,16 @@
     --img-filter:brightness(.88) contrast(1.02);
   }
 }
+:root[data-theme="dark"]{
+    --bg:#111A15;--card:#17231D;--fg:#E6EFE9;--muted:#A3B5AA;
+    --accent:#7CC39A;--link:#8ED6AE;--on-accent:#111A15;
+    --line:#2C4036;--card-line:#3A5245;--tint:#1C2B23;--track:#26382E;
+    --warm:#E0B15A;--grad-a:#17281F;--grad-b:#111A15;--grid:rgba(124,195,154,.08);
+    --img-filter:brightness(.88) contrast(1.02);
+}
+:root{color-scheme:light dark}
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--fg);
@@ -29,6 +39,20 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius
 p{margin:0 0 1.1em}
 .src{display:block;font-size:.85rem;color:var(--muted);margin:.3rem 0 0;line-height:1.4}
 .note{color:var(--muted);font-size:.92rem}
+
+/* 화면 모드 전환 버튼 */
+.theme-toggle{position:fixed;top:12px;right:12px;z-index:10;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--card-line);background:var(--card);color:var(--accent);cursor:pointer;display:grid;place-items:center;padding:0}
+.theme-toggle:hover{background:var(--tint)}
+.theme-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.theme-toggle svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .i-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .i-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .i-moon{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .theme-toggle .i-sun{display:block}
+  :root:not([data-theme="light"]) .theme-toggle .i-moon{display:none}
+}
 
 /* 버튼 */
 .btn{display:inline-block;padding:.5rem 1.2rem;border-radius:999px;background:var(--accent);color:var(--on-accent);
