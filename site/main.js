@@ -13,6 +13,11 @@ fetch('data/metrics.json').then(function (r) {
     if (a) a.textContent = n.value['기준일'];
     if (b) b.textContent = n.value['확정 전 일수'];
   }
+  var tc = d.submission_task_count, tiles = document.querySelector('.tiles');
+  if (tc && tiles) {
+    tiles.textContent = '';
+    for (var k = 0; k < tc.value; k++) tiles.appendChild(document.createElement('i'));
+  }
   var rate = d.attendance_rate;
   if (rate) document.querySelectorAll('.ring').forEach(function (el) { el.style.setProperty('--v', rate.value); });
   var days = d.ritual_record_days, bars = document.querySelectorAll('.bar');

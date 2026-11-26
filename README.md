@@ -35,9 +35,11 @@ python -m http.server 8000 -d site
 # 2) 갱신 프로그램을 합성 샘플 입력으로 실행
 python updater/update.py --input updater/sample_input --out updater/output
 
-# 3) 테스트 (10개)
+# 3) 테스트 (14개)
 python -m unittest discover -s updater/tests
 ```
+
+실제 기록으로 사이트까지 한 번에 갱신·배포하려면 `python updater/publish.py --input <실데이터 폴더>`를 실행합니다([상세](updater/README.md)).
 
 > [!NOTE]
 > 사이트는 `data/*.json`을 `fetch`로 읽기 때문에 `index.html`을 파일로 직접 열지 말고 위 명령처럼 로컬 서버로 여세요.
@@ -71,7 +73,7 @@ kms-portfolio/
 │   ├── update.py         후보 생성·승인 반영·--publish-to
 │   ├── sample_input/     공개용 합성 입력 (출석·제출 수치만 실제 값)
 │   ├── output/           샘플 실행 결과와 2회 실행 비교 기록
-│   └── tests/            단위 테스트 10개
+│   └── tests/            단위 테스트 14개
 ├── docs/                 이력서·자기소개서·경력기술서 등 문서
 └── docs/images/          README용 스크린샷
 ```
@@ -85,14 +87,14 @@ kms-portfolio/
 
 ## 한계와 다음 할 일
 - 분류는 `KEYWORDS` 사전의 키워드 일치 수로 하므로, 사전에 없는 표현은 후보에서 빠집니다.
-- 승인 후 사이트 반영(`approved.json` 편집 → 실행 → 커밋)은 수동 단계입니다.
+- 기록 내려받기와 문장 승인(`approved.json` 편집)은 수동입니다. 이후 반영·배포는 `publish.py` 한 번으로 끝납니다.
 - 출석 수치에는 확정 전 1일이 포함되어 있습니다(기준일 2026-11-16).
 - 테마 선택은 브라우저(localStorage)에만 저장되어 다른 기기로 이어지지 않습니다.
 
 <details>
 <summary>제출 시 확인 항목 요약</summary>
 
-- 갱신 프로그램 단위 테스트 10개 통과, 샘플 입력 2회 실행 결과 일치
+- 갱신 프로그램 단위 테스트 14개 통과, 샘플 입력 2회 실행 결과 일치
 - 입력 원본·내부 노트는 `.gitignore`로 저장소 제외 (타인 실명이 들어 있을 수 있음)
 - 실행에 환경변수·API 키 불필요
 
