@@ -13,7 +13,20 @@
 
 테스트: `python -m unittest discover -s updater/tests`
 
-## 승인 → 사이트 반영
+## 한 번 실행으로 갱신·배포 (`publish.py`)
+새 기록을 실제 기록 폴더에 넣고 **한 번** 실행하면 수치 재집계 → `site/data` 교체 → 커밋 → PR 2개 병합(작업 브랜치 → master → main) → Vercel 배포까지 진행합니다.
+```
+python updater/publish.py --input <실데이터 폴더>
+```
+- 먼저 바뀌는 수치와 승인 문장을 보여 주고 `y`를 입력해야 배포합니다. `--dry-run`은 보여 주기만 하고, `--yes`는 묻지 않습니다.
+- 바뀐 내용이 없으면 아무것도 하지 않습니다.
+- 커밋하는 파일은 `site/data/metrics.json`, `site/data/site_data.json` 두 개뿐입니다.
+- 다음이면 중단합니다: 합성 샘플 입력, `master`가 아닌 브랜치, 커밋하지 않은 변경, 아직 배포하지 않은 master 변경.
+- 필요한 것: git, 로그인한 GitHub CLI(`gh auth login`), 저장소 push 권한.
+- 새 문장은 자동으로 올라가지 않습니다. 출력 폴더의 `candidates.md`에서 고른 id를 `approved.json`에 넣고 실행해야 반영됩니다.
+- 기록 파일 내려받기와 `attendance.json`·`submissions.json` 작성은 직접 합니다.
+
+## 승인 → 사이트 반영 (배포 없이 단계별로)
 실제 기록은 저장소 밖 폴더(예: `%TEMP%\real_in`)에 두고, 출력도 저장소 밖(예: `%TEMP%\real_out`)에 씁니다.
 1. `python updater/update.py --input <실데이터 폴더> --out <출력 폴더>`를 실행하고, 출력 폴더의 `candidates.md`에서 사이트에 쓸 후보 id를 고릅니다.
 2. 실데이터 폴더의 `approved.json`(`{"approved": []}`)에 고른 id를 추가합니다.
